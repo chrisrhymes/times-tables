@@ -28,15 +28,12 @@
             firstNumber: this.first,
             secondNumber: this.second,
             answerNumber: this.answer
-            
           }
-          
         },
         props: {
           showIt: {default: false, type: Boolean},
           first:  { default: Math.floor(Math.random() * 12) + 1},
           second: { default: Math.floor(Math.random() * 12) + 1 },
-          answer: { default: 0 }
         },
         computed: {
           answer: function() { return (this.first * this.second) }
@@ -45,23 +42,19 @@
           show: function() {
             this.answerNumber = this.firstNumber * this.secondNumber;
             this.showAnswer = true;
-            console.log(this.answer)
           },
           next: function() {
             this.firstNumber = Math.floor(Math.random() * 12) + 1;
-            console.log(this.firstNumber);
             this.secondNumber = Math.floor(Math.random() *12 ) + 1;
             this.anwserNumber = (this.firstNumber * this.secondNumber);
             this.showAnswer = false;
-            //window.location.reload();
           }
         }
       });
       
       var test = new Vue({
         el: '.test'
-      })
-      
+      });
     </script>
   </body>
 </html>
