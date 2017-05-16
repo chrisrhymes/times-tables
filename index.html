@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>Maths Quiz</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <section class="hero is-primary is-fullheight">
+      <div class="hero-body">
+        <div class="container ">
+          <h1 class="title">
+          Times table maths quiz
+          </h1>
+          <div class="test content has-text-center">
+              <quiz></quiz>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <script src="https://unpkg.com/vue@2.3.3" type="text/javascript"></script>
+    
+    <script>
+      Vue.component('quiz', {
+        template: '<div><h1>{{ firstNumber }} x {{ secondNumber }} = <span v-if="showAnswer">{{ answerNumber }}</span></h1><br><button class="button" v-on:click="show">Show Answer</button><button class="button is-info" v-on:click="next">Next</button></div>',
+        data() {
+          return  {
+            showAnswer : this.showIt,
+            firstNumber: this.first,
+            secondNumber: this.second,
+            answerNumber: this.answer
+            
+          }
+          
+        },
+        props: {
+          showIt: {default: false, type: Boolean},
+          first:  { default: Math.floor(Math.random() * 12) + 1},
+          second: { default: Math.floor(Math.random() * 12) + 1 },
+          answer: { default: 0 }
+        },
+        computed: {
+          answer: function() { return (this.first * this.second) }
+        },
+        methods: {
+          show: function() {
+            this.answerNumber = this.firstNumber * this.secondNumber;
+            this.showAnswer = true;
+            console.log(this.answer)
+          },
+          next: function() {
+            this.firstNumber = Math.floor(Math.random() * 12) + 1;
+            console.log(this.firstNumber);
+            this.secondNumber = Math.floor(Math.random() *12 ) + 1;
+            this.anwserNumber = (this.firstNumber * this.secondNumber);
+            this.showAnswer = false;
+            //window.location.reload();
+          }
+        }
+      });
+      
+      var test = new Vue({
+        el: '.test'
+      })
+      
+    </script>
+  </body>
+</html>
