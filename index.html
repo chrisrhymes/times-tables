@@ -2,17 +2,21 @@
   <head>
     <title>Maths Quiz</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.css" type="text/css" rel="stylesheet" />
+    <style>
+      .progress {
+          transition: all 0.5s;
+
+      }
+    </style>
   </head>
   <body>
-    <section class="hero is-primary is-fullheight">
-      <div class="hero-body">
-        <div class="container ">
-          <h1 class="title has-text-centered">
-          Times table maths quiz
-          </h1>
-          <div class="test content has-text-center">
-              <quiz></quiz>
-          </div>
+    <section class="section">
+      <div class="container ">
+        <h1 class="title has-text-centered">
+        Times table maths quiz
+        </h1>
+        <div class="test content has-text-center">
+            <quiz></quiz>
         </div>
       </div>
     </section>
@@ -46,13 +50,11 @@
                 </div>
               </div>
             </div>
-            <div class="columns">
+            <div class="columns is-multiline is-mobile">
               <div class="column">
-                <div class="">
-                  <p>
-                    <span class="tag is-large is-pulled-left is-danger">Incorrect: {{ incorrectCount }}</span>
-                  </p>  
-                </div>
+                <p>
+                  <span class="tag is-large is-pulled-left is-danger">Incorrect: {{ incorrectCount }}</span>
+                </p>  
               </div>
               <div class="column">
                 <span class="tag is-large is-pulled-right is-success">Correct: {{ correctCount }}</span>
@@ -73,7 +75,8 @@
             answerInput: '',
             correctAnswer: false,
             correctCount: 0,
-            incorrectCount: 0
+            incorrectCount: 0,
+            progress: 0
           }
         },
         props: {
@@ -97,6 +100,8 @@
             }
 
             this.showAnswer = true;
+
+            this.progress = (this.correctCount / (this.correctCount + this.incorrectCount)) * 100;
 
           },
           next: function() {
