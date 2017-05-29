@@ -27,9 +27,11 @@
       Vue.component('quiz', {
         template: `
           <div>
-            <div class="columns">
-              <div class="column content is-large">
-                <h1 class="has-text-centered is-marginless">{{ firstNumber }} x {{ secondNumber }}</h1>
+            <div class="columns is-desktop">
+              <div class="column">
+                <div class="content is-large">
+                  <h1 class="has-text-centered is-marginless">{{ firstNumber }} x {{ secondNumber }}</h1>
+                </div>
               </div>
               <div class="column">
                 <div class="field has-addons">
@@ -37,7 +39,7 @@
                     <input v-model="answerInput" type="number" class="input is-large" ></input> 
                   </p>
                   <p class="control">
-                    <button class="button is-info is-large" v-on:click="show">Mark Answer</button>
+                    <button class="button is-info is-large" v-on:click="show">Mark</button>
                   </p>
                 </div>
               </div>
