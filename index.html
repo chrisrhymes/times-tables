@@ -7,7 +7,7 @@
     <section class="hero is-primary is-fullheight">
       <div class="hero-body">
         <div class="container ">
-          <h1 class="title">
+          <h1 class="title has-text-centered">
           Times table maths quiz
           </h1>
           <div class="test content has-text-center">
@@ -21,13 +21,59 @@
     
     <script>
       Vue.component('quiz', {
-        template: '<div><h1>{{ firstNumber }} x {{ secondNumber }} = <span v-if="showAnswer">{{ answerNumber }}</span></h1><br><button class="button" v-on:click="show">Show Answer</button><button class="button is-info" v-on:click="next">Next</button></div>',
+        template: `
+          <div>
+            <div class="columns">
+              <div class="column content is-large">
+                <h1 class="has-text-centered is-marginless">{{ firstNumber }} x {{ secondNumber }}</h1>
+              </div>
+              <div class="column">
+                <div class="field has-addons">
+                  <p class="control is-expanded">
+                    <input v-model="answerInput" type="number" class="input is-large" ></input> 
+                  </p>
+                  <p class="control">
+                    <button class="button is-info is-large" v-on:click="show">Mark Answer</button>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column">
+                <div class=" notification has-text-centered" v-if="showAnswer" :class="[correctAnswer ? 'is-success': 'is-danger']">
+                  <span v-if="correctAnswer">Correct, the answer is {{ answerNumber }}</span>
+                  <span v-else>Sorry, please try again</span>
+                </div>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column">
+                <div class="">
+                  <p>
+                    <span class="tag is-large is-pulled-left is-danger">Incorrect: {{ incorrectCount }}</span>
+                  </p>  
+                </div>
+              </div>
+              <div class="column">
+                <span class="tag is-large is-pulled-right is-success">Correct: {{ correctCount }}</span>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column">
+                <button class="button is-light is-fullwidth is-medium" v-on:click="next">Next</button>
+              </div>
+            </div>
+          </div>`,
         data() {
           return  {
             showAnswer : this.showIt,
             firstNumber: this.first,
             secondNumber: this.second,
-            answerNumber: this.answer
+            answerNumber: this.answer,
+            answerInput: '',
+            correctAnswer: false,
+            correctCount: 0,
+            incorrectCount: 0
           }
         },
         props: {
@@ -40,13 +86,24 @@
         },
         methods: {
           show: function() {
+            this.correctAnswer = false;
             this.answerNumber = this.firstNumber * this.secondNumber;
+            if(this.answerInput == this.answerNumber)
+            {
+              this.correctAnswer = true;
+              this.correctCount++;
+            } else {
+              this.incorrectCount++;
+            }
+
             this.showAnswer = true;
+
           },
           next: function() {
             this.firstNumber = Math.floor(Math.random() * 12) + 1;
             this.secondNumber = Math.floor(Math.random() *12 ) + 1;
             this.anwserNumber = (this.firstNumber * this.secondNumber);
+            this.answerInput = '';
             this.showAnswer = false;
           }
         }
