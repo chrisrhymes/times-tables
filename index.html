@@ -2,7 +2,7 @@
   <head>
     <title>Maths Quiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <style>
       .progress {
           transition: all 0.5s;
@@ -12,7 +12,7 @@
   </head>
   <body>
     <section class="section">
-      <div class="container ">
+      <div class="container">
         <h1 class="title has-text-centered">
         Times table maths quiz
         </h1>
@@ -29,16 +29,16 @@
       Vue.component('quiz', {
         template: `
           <div>
-            <div class="columns is-desktop">
-              <div class="column">
+            <div class="columns">
+              <div class="column is-6">
                 <div class="content is-large">
                   <h1 class="has-text-centered is-marginless">{{ firstNumber }} x {{ secondNumber }}</h1>
                 </div>
               </div>
-              <div class="column">
+              <div class="column is-6">
                 <div class="field has-addons">
                   <p class="control is-expanded">
-                    <input v-model="answerInput" type="number" class="input is-large" ></input> 
+                    <input v-model="answerInput" type="number" class="input is-large" >
                   </p>
                   <p class="control">
                     <button class="button is-info is-large" v-on:click="show">Mark</button>
